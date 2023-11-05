@@ -11,7 +11,8 @@ const Menu = () => {
 
   return (
     <nav className=" bg-white border-gray-200 dark:bg-[#161616]">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 container sm:px-6">
+      <div className='container sm:px-6 mx-auto'>
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4">
         <a href="https://flowbite.com" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Guiño
@@ -101,7 +102,7 @@ const Menu = () => {
         <Cart menuOpen={menuOpen}/>
     </div>
       </div>
-      
+      </div>
     </nav>
   );
 };

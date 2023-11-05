@@ -1,17 +1,14 @@
-const ProductCard = ({ imageUrl, title, price, discountedPrice }) => {
+import { Link } from "react-router-dom";
+
+const ProductCard = ({ product}) => {
     return (
-        <section className="flex items-center py-[30px]  container ">
-        <div className="px-4 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 lg:gap-6 sm:gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            
-            {/*Card*/}
-           
-            <div className="relative overflow-hidden bg-white shadow rounded-xl dark:bg-[#232222] w-[300px]">
+        <Link to={"/product/"+product._id}>
+            <div className="relative overflow-hidden bg-white shadow rounded-xl dark:bg-[#232222] w-[300px] md:mr-[20px]">
               <div className="relative overflow-hidden">
                 <div className="mb-5 overflow-hidden">
                   <img
                     className="object-cover w-full mx-auto transition-all rounded h-72 hover:scale-110"
-                    src="https://buenosaires.gob.ar/sites/default/files/media/image/2021/12/15/e2cd30f9e87e906f3d1f12a6ae410307f40e2f54.png"
+                    src={product.img}
                     alt=""
                   />
                 </div>
@@ -33,13 +30,13 @@ const ProductCard = ({ imageUrl, title, price, discountedPrice }) => {
               </div>
               <a>
                 <h3 className="px-5 mb-4 text-lg font-bold dark:text-white">
-                  Ciruelo de flor
+                  {product.name}
                 </h3>
               </a>
               <div className="flex">
                 <div className="w-1/2 px-5 pb-3">
                   <p className="text-lg font-bold text-[#48a259] dark:text-[#48a259]">
-                    $299.99
+                    {product.price}
                   </p>
                   <span className="block -mt-1 text-xs font-semibold text-gray-400 line-through">
                     $399.99
@@ -50,11 +47,7 @@ const ProductCard = ({ imageUrl, title, price, discountedPrice }) => {
                 </button>
               </div>
             </div>
-            {/* end cards */}
-            
-          </div>
-        </div>
-      </section>
+            </Link>
     );
   };
   

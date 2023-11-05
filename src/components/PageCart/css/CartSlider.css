@@ -1,3 +1,5 @@
-.slider-card{
-    background: url(../../../../public//img/background-slider.jpg);
+.slider-cart{
+    background: url(../../../../public/img/cart-slider-3.jpg);
+    background-size: cover;
+    background-attachment: fixed;
 }

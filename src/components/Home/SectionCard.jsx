@@ -10,12 +10,15 @@ export default function SectionCard(params) {
         try {
           const response = await axios.get("https://ultramarine-deer-yoke.cyclic.cloud/api/products");
           console.log("Datos recibidos:", response.data);
+          setFeaturedProduct(response.data)
         } catch (error) {
           console.error("Error en la solicitud:", error);
         }
       };
-  
+      
       fetchData();
+
+      console.log("datos",featuredProduct);
     }, []);
 
     return(
@@ -31,7 +34,17 @@ export default function SectionCard(params) {
             <h1 className="text-gray-900 dark:text-white text-3xl md:text-5xl font-extrabold mb-2">Cultiva el Paraíso en tu Jardín</h1>
             <p className="text-lg font-normal text-gray-500 dark:text-gray-300 mb-6">Transforma tu espacio al aire libre en un oasis de serenidad con nuestros productos destacados del vivero.</p>
           </div>
-          <ProductCard/>
+
+          <div className="flex items-center py-[30px]  container">
+        <div className="px-4 mx-auto max-w-7xl">
+          <div className="grid grid-cols-1 gap-4 lg:gap-6 sm:gap-4 sm:grid-cols-2 md:grid-cols-3">
+          {featuredProduct.map((product) => (
+            <ProductCard product={product} key={product.id} />
+          ))}
+          </div>
+          </div>
+          </div>
+
           </div>
           
       </section>
