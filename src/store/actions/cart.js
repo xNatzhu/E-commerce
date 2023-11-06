@@ -1,23 +1,11 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 
-export const get_city = createAsyncThunk("get_city", async () => {
-    const urlCityApi = "http://localhost:3000/api/citys";
-  
+export const cart_product = createAsyncThunk("cart_product", async (product) => {  
     try {
-      const city = await axios
-        .get(urlCityApi)
-        .then((res) => {
-          console.log(res.data);
-          return res.data;
-        })
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          throw error; // Re-lanza el error para que Redux Toolkit lo maneje
-        });
-  
+      const cartProduct = product
+      console.log("actions", cartProduct);
       return {
-        city, //se va mostrar
+        cartProduct,
       };
     } catch (error) {
       console.log(error);
