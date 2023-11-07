@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useDispatch, useSelector } from 'react-redux';
-import {cart_product} from "../store/actions/cart.js"
+import { useDispatch, useSelector } from "react-redux";
+import { cart_product } from "../store/actions/cart.js";
+import toast, { Toaster } from "react-hot-toast";
 import "./css/ProductDetail.css";
 export default function ProductDetail(params) {
   const { id } = useParams();
   const [productDetail, setProductDetail] = useState([]);
-  const [cartProduct, setCartProduct] = useState([])
+  const [cartProduct, setCartProduct] = useState([]);
+  const listProduct = useSelector((state) => state.cartProductReducer.listProduct);
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchData = async () => {
@@ -24,14 +26,18 @@ export default function ProductDetail(params) {
     fetchData();
   }, []);
 
-  const onCart = (product)=>{
-  const productExists = cartProduct.some((item) => item._id === product._id);
-  if (!productExists) {
-    setCartProduct([...cartProduct, product]);
-    dispatch(cart_product(product));
-  }
-  
-  }
+  const onCart = (product) => {
+    const productCartFilter = listProduct.some((productCart)=>productCart.cartProduct._id === product._id)
+    if (!productCartFilter) {
+      console.log(productCartFilter);
+      setCartProduct([...cartProduct, product]);
+      dispatch(cart_product(product));
+      toast.success('Se agrego un producto al carrito')
+      
+    }else{
+      toast.error("El producto existe en el carrito")
+    }
+  };
   console.log(cartProduct);
   return (
     <section className="background-detail-product">
@@ -120,9 +126,13 @@ export default function ProductDetail(params) {
                     </div>
                   </div>
                   <div className="flex flex-wrap items-center gap-4">
-                    <button onClick={()=>onCart(productDetail)} className="w-full p-4 bg-[#48a259] rounded-lg lg:w-2/5 dark-text-gray-200 text-gray-50 hover-bg-blue-600 dark-bg-blue-500 dark-hover-bg-blue-700">
+                    <button
+                      onClick={() => onCart(productDetail)}
+                      className="w-full p-4 bg-[#48a259] rounded-lg lg:w-2/5 dark-text-gray-200 text-gray-50 hover-bg-blue-600 dark-bg-blue-500 dark-hover-bg-blue-700"
+                    >
                       Carrito
                     </button>
+                    <Toaster position="top-right" reverseOrder={true} />
                     <button className="flex items-center justify-center w-full p-4 text-[#48a259] border border-[#48a259] rounded-lg lg:w-2/5 dark-text-gray-200 dark-border-blue-600 hover-bg-blue-600 hover-border-blue-600 hover-text-gray-100 dark-bg-blue-500 dark-hover-bg-blue-700 dark-hover-border-blue-700 dark-hover-text-gray-300">
                       Comprar
                     </button>
@@ -133,13 +143,13 @@ export default function ProductDetail(params) {
           </div>
         </div>
         <div class="relative w-full h-[200px]">
-        <div className="flex w-[100%] justify-center">
-        <img
-            class="w-auto h-[300px]"
-            src="https://static.vecteezy.com/system/resources/previews/023/743/207/original/colored-plants-illustration-png.png"
-            alt=""
-          />
-        </div>
+          <div className="flex w-[100%] justify-center">
+            <img
+              class="w-auto h-[300px]"
+              src="https://static.vecteezy.com/system/resources/previews/023/743/207/original/colored-plants-illustration-png.png"
+              alt=""
+            />
+          </div>
           <div class="absolute top-0 left-0 w-full h-[300px]">
             <img
               class="w-full h-full"
