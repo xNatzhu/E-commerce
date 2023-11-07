@@ -1,33 +1,17 @@
 import { createReducer } from "@reduxjs/toolkit";
-import {cart_product} from "../actions/cart.js"
-//el estado inicial que va tener este estado
-const initialStore = {
-    productCart: [
-      {
-        name: "",
-        sku: "",
-        price: 0,
-        description: "",
-        quantity: 0,
-        category: {
-          _id: "",
-          name: "",
-          __v: 0
-        },
-        img: "",
-        deleted: false,
-        important: false,
-        __v: 0
-      }
-    ]
-  };
-  
-  const cartProductReducer = createReducer(initialStore, (builder)=>{
-    return builder.addCase(cart_product.fulfilled, (state, action) => {
-        state.productCart = action.payload; 
-        console.log(state.productCart);
-      });      
+import { cart_product } from "../actions/cart.js";
 
-})
-  
-export default cartProductReducer
+// El estado inicial que va a tener este estado
+const initialState = {
+  listProduct: []
+};
+
+const cartProductReducer = createReducer(initialState, (builder) => {
+  builder.addCase(cart_product.fulfilled, (state, action) => {
+    const newState = [...state.listProduct, action.payload]; 
+    console.log("list product", newState);
+    return { ...state, listProduct: newState }; 
+  });
+});
+
+export default cartProductReducer;
