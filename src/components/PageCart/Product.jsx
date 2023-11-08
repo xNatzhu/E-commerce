@@ -1,36 +1,51 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
-export default function Product(params) {
+export default function Product({onPriceAndQuantity}) {
+
+
   const dispatch = useDispatch();
   const listProduct = useSelector((state) => state.cartProductReducer.listProduct);
 
-  const [productAmount, setProductAmount] = useState({});
-
+  const [productAmount, setProductAmount] = useState([]);
   useEffect(() => {
     // Inicializa la cantidad de productos en el estado local
     const amounts = {};
     listProduct.forEach((product) => {
-      amounts[product.cartProduct._id] = 1;
+      amounts[product.cartProduct._id] = {
+        quantity: 1,
+        price: product.cartProduct.price,
+      };
     });
     setProductAmount(amounts);
   }, [listProduct]);
 
+
+  useEffect(()=>{
+    onPriceAndQuantity(productAmount);
+  },[productAmount])
+
+
   const onSumarProduct = (productId, stock) => {
-    if (productAmount[productId] < stock) {
+    if (productAmount[productId].quantity < stock) {
       setProductAmount((prevAmounts) => ({
         ...prevAmounts,
-        [productId]: prevAmounts[productId] + 1,
+        [productId]: {
+          ...prevAmounts[productId],
+          quantity: prevAmounts[productId].quantity + 1,
+        },
       }));
     }
   };
-  
 
   const onRestarProduct = (productId) => {
-    if (productAmount[productId] > 1) {
+    if (productAmount[productId].quantity > 1) {
       setProductAmount((prevAmounts) => ({
         ...prevAmounts,
-        [productId]: prevAmounts[productId] - 1,
+        [productId]: {
+          ...prevAmounts[productId],
+          quantity: prevAmounts[productId].quantity - 1,
+        },
       }));
     }
   };
@@ -87,9 +102,8 @@ export default function Product(params) {
                 </button>
 
                 <p className="w-12 px-2 py-4 text-center border-0 rounded-md bg-gray-700 dark:text-gray-50 font-bold md:text-right">
-                  {productAmount[product.cartProduct._id]}
+                {productAmount[product.cartProduct._id]?.quantity || 0}
                 </p>
-
                 <button
                   className="py-2 dark-text-white"
                   onClick={() => onSumarProduct(product.cartProduct._id, product.cartProduct.quantity)}
@@ -109,7 +123,7 @@ export default function Product(params) {
             </div>
             <div className="w-auto px-4 text-right md:w-1/6 lg:w-2/12">
               <p className="text-lg font-bold text-blue-500 dark:text-[#48a259]">
-                {`$${product.cartProduct.price * productAmount[product.cartProduct._id]}`}
+                {`$${parseFloat(product.cartProduct.price * productAmount[product.cartProduct._id]?.quantity || 0).toFixed(2)}`}
               </p>
             </div>
           </div>
