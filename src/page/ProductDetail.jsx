@@ -70,11 +70,8 @@ export default function ProductDetail(params) {
   return (
     <section className="background-detail-product" style={{
       background: `url(${productDetail.img})`,
-      backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-      backgroundPosition: 'center'
     }}>
-      <div className=" dark:bg-[#17130fe6] blur-2 ">
+      <div className=" dark:bg-[#17130fe6]  ">
         <div className="container mx-auto px-6  overflow-hidden  pt-[60px] font-poppins">
           <div className="max-w-6xl px-4 mx-auto md:px-6">
             <div className="flex flex-wrap -mx-4">
@@ -175,7 +172,7 @@ export default function ProductDetail(params) {
             </div>
           </div>
         </div>
-        <div class="relative w-full h-[200px]">
+        <div class="relative w-full">
           <div className="flex w-[100%] justify-center">
             <img
               class="w-auto h-[300px]"
