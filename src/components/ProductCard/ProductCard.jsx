@@ -58,13 +58,13 @@ const ProductCard = ({ product }) => {
         </h3>
       </a>
       <div className="flex">
-        <div className="w-1/2 px-5 pb-3">
-          <p className="text-lg font-bold text-[#48a259] dark:text-[#48a259]">
-            {product.price}
+        <div className="w-1/2 px-5 pb-3 flex items-center">
+          <p className="text-lg font-bold text-[#48a259] dark:text-[#48a259] py-[5px]">
+            ${product.price}
           </p>
-          <span className="block -mt-1 text-xs font-semibold text-gray-400 line-through">
+          {/*<span className="block -mt-1 text-xs font-semibold text-gray-400 line-through">
             $399.99
-          </span>
+  </span>*/}
         </div>
         <Link
           to={"/product/"+product._id}

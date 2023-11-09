@@ -116,9 +116,9 @@ export default function ProductDetail(params) {
                     </h2>
                     <p className="inline-block mb-6 text-4xl font-bold text-gray-700 dark:text-[#48a259] ">
                       <span>${productDetail.price}</span>
-                      <span className="text-base font-normal text-gray-500 line-through dark:text-gray-400">
+                     {/* <span className="text-base font-normal text-gray-500 line-through dark:text-gray-400">
                         $1800.99
-                      </span>
+  </span>*/}
                     </p>
                     <p className="max-w-md text-gray-700 dark:text-gray-300">
                       {productDetail.description}
