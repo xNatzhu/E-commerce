@@ -3,7 +3,7 @@ import PurchaseDetail from "./PurchaseDetail.jsx";
 export default function CartSlider(params) {
   return (
     <div className="slider-cart">
-      <div className="bg-white dark:bg-[#161616a9] flex flex-col relative z-20 items-center overflow-hidden">
+      <div className="bg-white dark:bg-[#161616ef] flex flex-col relative z-20 items-center overflow-hidden">
         <div className="container mx-auto px-6 flex flex-col relative pt-[40px]">
           <div className=" relative z-20 pt-[30px]">
           <p className="bg-blue-100 text-[#48a259] text-xs font-medium inline-flex items-center px-2.5 py-0.5 rounded-md dark:bg-gray-200 dark:text-[#48a259] mb-2">

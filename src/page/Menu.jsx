@@ -82,6 +82,7 @@ const Menu = () => {
           </ul>
         </div>
         <div className='flex'>
+          {/*
       <a className={`${
             menuOpen ? 'hidden' : 'block'} text-gray-200 px-2`} href="#">
         <svg
@@ -99,6 +100,7 @@ const Menu = () => {
           />
         </svg>
       </a>
+      */}
         <Cart menuOpen={menuOpen}/>
     </div>
       </div>

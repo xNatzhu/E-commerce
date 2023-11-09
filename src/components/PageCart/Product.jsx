@@ -83,41 +83,22 @@ export default function Product({onPriceAndQuantity}) {
               </p>
             </div>
 
-            <div className="w-auto px-4 md:w-1/6 lg:w-2/12">
-              <div className="inline-flex items-center px-4 font-semibold text-gray-500 border border-gray-200 rounded-md dark:border-[#48a259]">
+            <div className="w-auto md:w-1/6 lg:w-2/12">
+              <div className="inline-flex items-center px-4 font-semibold text-gray-500">
                 <button
                   className="py-2 dark:text-white"
                   onClick={() => onRestarProduct(product.cartProduct._id)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-dash"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"></path>
-                  </svg>
+                  <span className="m-auto text-2xl font-bold">-</span>
                 </button>
 
-                <p className="w-12 px-2 py-4 text-center border-0 rounded-md bg-gray-700 dark:text-gray-50 font-bold md:text-right">
-                {productAmount[product.cartProduct._id]?.quantity || 0}
-                </p>
+                <input className="w-12 px-2 py-4 text-center border-0  dark:text-gray-50 font-bold md:text-center bg-[#16161600]" value={productAmount[product.cartProduct._id]?.quantity || 0}/>
+                
                 <button
-                  className="py-2 dark-text-white"
+                  className="py-2 dark:text-white"
                   onClick={() => onSumarProduct(product.cartProduct._id, product.cartProduct.quantity)}
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="16"
-                    height="16"
-                    fill="currentColor"
-                    className="bi bi-plus"
-                    viewBox="0 0 16 16"
-                  >
-                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
-                  </svg>
+                  <span className="m-auto text-2xl font-bold">+</span>
                 </button>
               </div>
             </div>

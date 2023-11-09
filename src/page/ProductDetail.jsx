@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { cart_product } from "../store/actions/cart.js";
 import toast, { Toaster } from "react-hot-toast";
 import "./css/ProductDetail.css";
+import Swal from "sweetalert2";
+
+
 export default function ProductDetail(params) {
   const { id } = useParams();
+  const [countProduct, setCountProduct] = useState(1)
   const [productDetail, setProductDetail] = useState([]);
   const [cartProduct, setCartProduct] = useState([]);
   const listProduct = useSelector((state) => state.cartProductReducer.listProduct);
@@ -38,9 +42,38 @@ export default function ProductDetail(params) {
       toast.error("El producto existe en el carrito")
     }
   };
-  console.log(cartProduct);
+
+  const onSumar = ()=>{
+    if (countProduct< productDetail.quantity) {
+      setCountProduct(countProduct + 1)
+    }
+  }
+
+  const onRestar = ()=>{
+    if (countProduct > 1) {
+      setCountProduct(countProduct - 1)
+    }
+  }
+  
+  const onBuy = (product) => {
+    Swal.fire({
+      title: "¡Compra exitosa!",
+      html: `Producto: ${product.name} <br> Cantidad: ${countProduct} <br> Monto: $${(product.price * countProduct).toFixed(2)}`,
+      icon: "success",
+      iconColor: "#48a259",
+      confirmButtonText: "Ok",
+      confirmButtonColor: "#48a259",
+    });
+  }
+
+
   return (
-    <section className="background-detail-product">
+    <section className="background-detail-product" style={{
+      background: `url(${productDetail.img})`,
+      backgroundSize: 'cover',
+      backgroundRepeat: 'no-repeat',
+      backgroundPosition: 'center'
+    }}>
       <div className=" dark:bg-[#17130fe6] blur-2 ">
         <div className="container mx-auto px-6  overflow-hidden  pt-[60px] font-poppins">
           <div className="max-w-6xl px-4 mx-auto md:px-6">
@@ -112,15 +145,15 @@ export default function ProductDetail(params) {
                       Cantidad
                     </label>
                     <div className="relative flex flex-row w-full h-10 mt-6 bg-transparent rounded-lg">
-                      <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover-bg-gray-700 dark:text-gray-400 hover-text-gray-700 dark:bg-gray-200 hover-bg-gray-400">
+                      <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-l outline-none cursor-pointer dark:hover-bg-gray-700 dark:text-gray-400 hover-text-gray-700 dark:bg-gray-200 hover-bg-gray-400" onClick={onRestar}>
                         <span className="m-auto text-2xl font-thin">-</span>
                       </button>
                       <input
                         type="text"
                         className="flex items-center w-full font-semibold text-center text-gray-700 placeholder-gray-700 bg-gray-300 outline-none dark:text-gray-400 dark:placeholder-gray-400 dark:bg-[#221c17] focus:outline-none text-md hover-text-black"
-                        placeholder="1"
+                        value={countProduct}
                       />
-                      <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer dark:hover-bg-gray-700 dark:text-gray-400 dark-bg-gray-900 hover-text-gray-700 hover-bg-gray-400">
+                      <button className="w-20 h-full text-gray-600 bg-gray-300 rounded-r outline-none cursor-pointer dark:hover-bg-gray-700 dark:text-gray-400 dark-bg-gray-900 hover-text-gray-700 hover-bg-gray-400" onClick={onSumar}>
                         <span className="m-auto text-2xl font-thin">+</span>
                       </button>
                     </div>
@@ -133,7 +166,7 @@ export default function ProductDetail(params) {
                       Carrito
                     </button>
                     <Toaster position="top-right" reverseOrder={true} />
-                    <button className="flex items-center justify-center w-full p-4 text-[#48a259] border border-[#48a259] rounded-lg lg:w-2/5 dark-text-gray-200 dark-border-blue-600 hover-bg-blue-600 hover-border-blue-600 hover-text-gray-100 dark-bg-blue-500 dark-hover-bg-blue-700 dark-hover-border-blue-700 dark-hover-text-gray-300">
+                    <button onClick={()=>onBuy(productDetail)} className="flex items-center justify-center w-full p-4 text-[#48a259] border border-[#48a259] rounded-lg lg:w-2/5 dark-text-gray-200 dark-border-blue-600 hover-bg-blue-600 hover-border-blue-600 hover-text-gray-100 dark-bg-blue-500 dark-hover-bg-blue-700 dark-hover-border-blue-700 dark-hover-text-gray-300">
                       Comprar
                     </button>
                   </div>
