@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {NavLink } from 'react-router-dom';
+import {NavLink, Link } from 'react-router-dom';
 import "./css/Menu.css"
 import Cart from '../components/Menu/Cart';
 const Menu = () => {
@@ -13,11 +13,11 @@ const Menu = () => {
     <nav className=" bg-white border-gray-200 dark:bg-[#161616]">
       <div className='container sm:px-6 mx-auto'>
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between p-4">
-        <a href="https://flowbite.com" className="flex items-center">
+        <Link to="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
             Guiño
           </span>
-        </a>
+        </Link>
         <button
           onClick={toggleMenu}
           type="button"

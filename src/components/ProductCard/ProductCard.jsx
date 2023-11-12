@@ -7,22 +7,22 @@ import toast, { Toaster } from 'react-hot-toast';
 const ProductCard = ({ product }) => {
   const [cartProduct, setCartProduct] = useState([])
   const dispatch = useDispatch();
+
   const listProduct = useSelector((state) => state.cartProductReducer.listProduct);
 
   const onCart = (product)=>{
     const productCartFilter = listProduct.some((productCart)=>productCart.cartProduct._id === product._id)
+    
     if (!productCartFilter) {
-      console.log(productCartFilter);
       setCartProduct([...cartProduct, product]);
+
       dispatch(cart_product(product));
       toast.success('Se agrego un producto al carrito')
-      
     }else{
       toast.error("El producto existe en el carrito")
     }
     
   }
-  console.log("nuevo producto agregado", cartProduct);
   return (
     <div className="relative overflow-hidden bg-white shadow rounded-xl dark:bg-[#232222] w-[300px] md:mr-[20px]">
       <div className="relative overflow-hidden">

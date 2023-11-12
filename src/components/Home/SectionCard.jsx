@@ -36,8 +36,8 @@ export default function SectionCard(params) {
           </div>
 
           <div className="flex items-center py-[30px]  container">
-        <div className="px-4 mx-auto max-w-7xl">
-          <div className="grid grid-cols-1 gap-4 lg:gap-6 sm:gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div className="px-4 mx-auto lg:mx-0 max-w-7xl">
+          <div className="grid grid-cols-1 lg:gap-[50px] sm:gap-4 sm:grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {featuredProduct.map((product) => (
             <ProductCard product={product} key={product.id} />
           ))}
